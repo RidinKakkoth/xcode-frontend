@@ -1,9 +1,5 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Feed from './components/Post/Feed';
-import Login from './components/Auth/Login';
-import Signup from './components/Auth/Signup';
 import Navbar from './components/Navbar';
 import { useSelector } from 'react-redux';
 import FeedPage from './pages/FeedPage';

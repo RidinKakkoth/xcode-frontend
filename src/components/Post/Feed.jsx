@@ -69,7 +69,7 @@ const Feed = ({ profile }) => {
       {showModal && (
         <AddPostModal
           profile={profile}
-          setTrigger={setTrigger}
+          // setTrigger={setTrigger}
           setShowModal={setShowModal}
           postToEdit={postToEdit}
           isEditing={isEditing}
