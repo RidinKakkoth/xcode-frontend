@@ -54,9 +54,9 @@ const Post = ({
             <div className="flex justify-end space-x-2 mt-2">
               <button
                 onClick={() => {
-                  // Proceed with delete logic
+                  
                   performDelete();
-                  closeToast(); // Close the toast
+                  closeToast(); 
                 }}
                 className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
               >

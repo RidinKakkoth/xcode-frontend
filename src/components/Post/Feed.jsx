@@ -10,7 +10,7 @@ const Feed = ({ profile }) => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.post.posts);
   const activePage = useSelector((state) => state.post.activePage);
-  console.log(activePage,"::::::::::");
+  
   
 
   const [showModal, setShowModal] = useState(false);
@@ -43,7 +43,7 @@ const Feed = ({ profile }) => {
   };
 
   return (
-    <div className="relative md:flex  justify-center bg-[#f3f3f3]">
+    <div className="relative justify-center bg-[#f3f3f3]">
       <p className="text-xl ml-2 font-medium ">{profile ? "Timeline" : "Feed"}</p>
       <div className="p-10">
         {posts?.map((post) => (

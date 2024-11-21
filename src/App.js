@@ -13,7 +13,7 @@ const App = () => {
   
       <Router>
         {isLoggedIn && <Navbar />}
-        <div className={isLoggedIn ? "max-w-2xl mx-auto mt-20" : "w-full "}>
+        <div className={isLoggedIn ? "w-full sm:max-w-xl mx-auto mt-20" : "w-full "}>
           <Routes>
             <Route path="/" element={isLoggedIn ? <FeedPage /> : <Navigate to="/login" />} />
             <Route path="/login" element={isLoggedIn ? <FeedPage /> : <LoginPage/>} />
