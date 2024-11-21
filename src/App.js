@@ -18,6 +18,7 @@ const App = () => {
         <div className={isLoggedIn ? "max-w-2xl mx-auto mt-20" : "w-full "}>
           <Routes>
             <Route path="/" element={isLoggedIn ? <Feed /> : <Navigate to="/login" />} />
+            <Route path="/login" element={isLoggedIn ? <Feed /> : <Login/>} />
             <Route path="/profile" element={isLoggedIn ? <Feed  profile={true}/> : <Navigate to="/login" />} />
             <Route path="/login" element={!isLoggedIn ? <Login /> : <Navigate to="/" />} />
             <Route path="/signup" element={!isLoggedIn ? <Signup /> : <Navigate to="/" />} />
