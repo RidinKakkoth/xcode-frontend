@@ -1,9 +1,8 @@
-// src/features/authSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   user: null,
-  token: null,  // Add token to the state
+  token: null,  
   isLoggedIn: false,
 };
 
@@ -13,12 +12,12 @@ const authSlice = createSlice({
   reducers: {
     login: (state, action) => {
       state.user = action.payload.user;
-      state.token = action.payload.token;  // Save token in Redux
+      state.token = action.payload.token;  
       state.isLoggedIn = true;
     },
     logout: (state) => {
       state.user = null;
-      state.token = null;  // Clear the token on logout
+      state.token = null;  
       state.isLoggedIn = false;
     },
   },

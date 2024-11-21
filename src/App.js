@@ -6,10 +6,12 @@ import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import Navbar from './components/Navbar';
 import { useSelector } from 'react-redux';
-// import AddPost from './components/Post/AddPost';
+import FeedPage from './pages/FeedPage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 
 const App = () => {
-  const { isLoggedIn } = useSelector((state) => state.auth); // Get the login status from Redux state
+  const { isLoggedIn } = useSelector((state) => state.auth); 
 
   return (
   
@@ -17,11 +19,11 @@ const App = () => {
         {isLoggedIn && <Navbar />}
         <div className={isLoggedIn ? "max-w-2xl mx-auto mt-20" : "w-full "}>
           <Routes>
-            <Route path="/" element={isLoggedIn ? <Feed /> : <Navigate to="/login" />} />
-            <Route path="/login" element={isLoggedIn ? <Feed /> : <Login/>} />
-            <Route path="/profile" element={isLoggedIn ? <Feed  profile={true}/> : <Navigate to="/login" />} />
-            <Route path="/login" element={!isLoggedIn ? <Login /> : <Navigate to="/" />} />
-            <Route path="/signup" element={!isLoggedIn ? <Signup /> : <Navigate to="/" />} />
+            <Route path="/" element={isLoggedIn ? <FeedPage /> : <Navigate to="/login" />} />
+            <Route path="/login" element={isLoggedIn ? <FeedPage /> : <LoginPage/>} />
+            <Route path="/profile" element={isLoggedIn ? <FeedPage  profile={true}/> : <Navigate to="/login" />} />
+            <Route path="/login" element={!isLoggedIn ? <LoginPage /> : <Navigate to="/" />} />
+            <Route path="/signup" element={!isLoggedIn ? <SignupPage /> : <Navigate to="/" />} />
           </Routes>
         </div>
       </Router>

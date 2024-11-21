@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import moment from "moment";
 import { deletePost } from "../../api/api";
 import { toast } from "react-toastify";
+import { removePost } from "../../features/postSlice";
+import { useDispatch } from "react-redux";
 
 const Post = ({
   post,
@@ -11,6 +13,9 @@ const Post = ({
   setIsEditing,
   setPosts,
 }) => {
+
+  const dispatch = useDispatch();
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const dropdownRef = useRef(null);
@@ -33,9 +38,9 @@ const Post = ({
   }, [dropdownOpen]);
 
   const handleEdit = () => {
-    setPostToEdit(post); // Pass current post data
+    setPostToEdit(post); 
     setIsEditing(true);
-    setShowModal(true); // Open modal
+    setShowModal(true); 
     setDropdownOpen(false);
   };
 
@@ -66,7 +71,7 @@ const Post = ({
             </div>
           </div>
         ),
-        { autoClose: false } // Prevent toast from closing automatically
+        { autoClose: false } 
       );
 
       const performDelete =async () => {
@@ -74,8 +79,9 @@ const Post = ({
 
         if (response.success) {
           setDropdownOpen(false);
-  
-          setPosts((prev) => prev.filter((item) => item._id !== post._id));
+          
+          dispatch(removePost(post._id));
+          // setPosts((prev) => prev.filter((item) => item._id !== post._id));
        
         } else {
           toast.error("Failed to delete the post: " + response.message);
@@ -93,7 +99,7 @@ const Post = ({
     <div className="bg-white p-4 rounded-md shadow-md mb-4 relative">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
-          <div className="w-12 h-12 rounded-full bg-gray-300">
+          <div className="w-12 h-12 rounded-full">
             <img
               src="https://res.cloudinary.com/ddymh3cnk/image/upload/v1727781671/CureConnect/admin/upload_area_zhqtbm.svg"
               alt=""
@@ -133,7 +139,7 @@ const Post = ({
       <img
         src={post.image}
         alt="Post"
-        className="w-full h-64 object-cover rounded-md mb-4 shadow-md"
+        className="w-full h-32  md:h-64 object-cover rounded-md mb-4 shadow-md"
       />
 
       <p className="font-normal">
