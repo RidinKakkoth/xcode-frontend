@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../features/authSlice';
-import { useNavigate } from 'react-router-dom'; // Using useNavigate for navigation
-import { userSignUp } from '../../api/api'; // Assuming this API function handles user registration
+import { useNavigate } from 'react-router-dom'; 
+import { userSignUp } from '../../api/api'; 
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState(''); // For password confirmation
-  const [error, setError] = useState('');  // For displaying error messages
+  const [confirmPassword, setConfirmPassword] = useState(''); 
+  const [error, setError] = useState('');  
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Hook to handle navigation
+  const navigate = useNavigate(); 
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -22,19 +22,11 @@ const SignUp = () => {
     }
 
     try {
-      // Send signup data to the backend API
+
       const response = await userSignUp(name,email, password);
-      console.log(response, "signup response");
-
-      // // Dispatch login action to store user data and token in Redux store
-      // dispatch(login({ user: response.user, token: response.token }));
-      
-      // // Optionally store the token or user data in localStorage
-      // localStorage.setItem('user', JSON.stringify(response.data.user));
-      // localStorage.setItem('token', response.data.token); // Store JWT token for authentication
-
-      // Redirect to the login page after successful signup
-      navigate('/login'); // Use navigate to redirect to the login page
+   
+if(response.success)
+      navigate('/login'); 
 
     } catch (err) {
       setError('Failed to sign up. Please try again.');
@@ -43,7 +35,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500">
       <form onSubmit={handleSignUp} className="bg-white p-6 rounded-md shadow-md">
         <h2 className="text-xl font-semibold mb-4 text-center">Sign Up</h2>
         
@@ -79,14 +71,14 @@ const SignUp = () => {
           onChange={(e) => setConfirmPassword(e.target.value)}
           className="block p-2 mb-4 w-full border border-gray-300 rounded-md"
           />
-          {error && <p className="text-red-500 mb-4">{error}</p>} {/* Display error if any */}
-        <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-md">
+          {error && <p className="text-red-500 mb-4">{error}</p>} 
+        <button type="submit" className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 text-white p-2 rounded-md">
           Sign Up
         </button>
 
         <button
           type="button"
-          onClick={() => navigate('/login')} // Redirect to login page
+          onClick={() => navigate('/login')} 
           className="mt-4 w-full bg-gray-300 text-gray-700 p-2 rounded-md"
         >
           Already have an account? Log In

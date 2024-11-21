@@ -2,13 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../features/authSlice';
-import { FaUserCircle } from 'react-icons/fa'; // User icon from react-icons
+import { FaUserCircle } from 'react-icons/fa'; 
 
 const Navbar = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false); // State for dropdown visibility
+  const [dropdownOpen, setDropdownOpen] = useState(false); 
   const dispatch = useDispatch();
   const { user, isLoggedIn } = useSelector((state) => state.auth);
-  const dropdownRef = useRef(null); // Ref for dropdown container
+  const dropdownRef = useRef(null); 
 
   const handleLogout = () => {
     dispatch(logout());
@@ -22,7 +22,7 @@ const Navbar = () => {
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setDropdownOpen(false); // Close the dropdown if clicked outside
+      setDropdownOpen(false); 
     }
   };
 
@@ -38,11 +38,13 @@ const Navbar = () => {
   }, [dropdownOpen]);
 
   return (
-    <div className="fixed top-0 left-0 w-full shadow-md z-10 bg-gray-800 text-white p-4 flex justify-between items-center">
-      <span className="font-bold text-xl">Instagram</span>
+    <div className="fixed top-0 left-0 w-full shadow-md z-10 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 text-white p-4 flex justify-between items-center">
+      <span className="font-bold text-xl">Xcode Instagram</span>
       <div>
         {isLoggedIn ? (
-          <div className="relative" ref={dropdownRef}>
+          <div className="relative flex items-center gap-2" ref={dropdownRef}>
+            <div className='bg-green-500 rounded-full w-2 h-2'></div>
+            <p>Hey {user.name}</p>
             <FaUserCircle
               className="text-3xl cursor-pointer"
               onClick={toggleDropdown}
