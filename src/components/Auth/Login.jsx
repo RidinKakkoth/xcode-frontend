@@ -16,6 +16,7 @@ const Login = () => {
 
     try {
       const response = await userLogin(email, password);
+      console.log(response)
       if(response.success){
 
         dispatch(login({ user: response.user, token: response.token }));
