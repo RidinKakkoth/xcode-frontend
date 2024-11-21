@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { IoIosCamera } from "react-icons/io"; // Camera icon from react-icons
-import { addPost, updatePost } from "../../api/api"; // Add updatePost API
+import { IoIosCamera } from "react-icons/io"; 
+import { addPost, updatePost } from "../../api/api"; 
 import { useNavigate } from "react-router-dom";
 import { IoCloseCircle } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
@@ -10,10 +10,8 @@ const AddPostModal = ({setTrigger, setShowModal, postToEdit, isEditing,profile }
   const [caption, setCaption] = useState("");
   const [description, setDescription] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
+  const [loading,setLoading]=useState(false)
 
-  const navigate = useNavigate();
-
-  // Prefill data if editing
   useEffect(() => {
     if (isEditing && postToEdit) {
       setCaption(postToEdit.caption);
@@ -26,11 +24,12 @@ const AddPostModal = ({setTrigger, setShowModal, postToEdit, isEditing,profile }
     const file = e.target.files[0];
     if (file) {
       setImage(file);
-      setImagePreview(URL.createObjectURL(file)); // Preview the selected image
+      setImagePreview(URL.createObjectURL(file)); 
     }
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true)
     e.preventDefault();
 
     if (!caption || !description || (!image && !imagePreview)) {
@@ -43,7 +42,7 @@ const AddPostModal = ({setTrigger, setShowModal, postToEdit, isEditing,profile }
         // Update post
         const formData = new FormData();
         
-        formData.append("image", image || postToEdit.image); // Use existing image if no new one is provided
+        formData.append("image", image || postToEdit.image); 
         formData.append("caption", caption);
         formData.append("description", description);
         const response=await updatePost(postToEdit._id, formData); 
@@ -52,7 +51,8 @@ const AddPostModal = ({setTrigger, setShowModal, postToEdit, isEditing,profile }
         if(response.success){
           setShowModal(false);
           alert("updated")
-      
+          setLoading(false)
+          setTrigger((prev)=>!prev)
      
         }
         
@@ -65,6 +65,7 @@ const AddPostModal = ({setTrigger, setShowModal, postToEdit, isEditing,profile }
         const response= await addPost(formData); 
         if (response.success) {
           setTrigger((prev)=>!prev)
+          setLoading(false)
           alert("added");
         }
         
@@ -90,7 +91,6 @@ const AddPostModal = ({setTrigger, setShowModal, postToEdit, isEditing,profile }
           </button>
         </div>
 
-        {/* Image Upload Section */}
         <div className="flex justify-center mb-4">
           {!imagePreview ? (
             <label htmlFor="file-input" className="cursor-pointer">
@@ -131,7 +131,6 @@ const AddPostModal = ({setTrigger, setShowModal, postToEdit, isEditing,profile }
           className="w-full p-3 border border-gray-300 rounded-md mb-4"
         />
 
-        {/* Description Input */}
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -140,12 +139,12 @@ const AddPostModal = ({setTrigger, setShowModal, postToEdit, isEditing,profile }
           className="w-full p-3 border border-gray-300 rounded-md mb-4"
         />
 
-        {/* Submit Button */}
         <button
           onClick={handleSubmit}
           className="w-full py-2 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 text-white rounded-md hover:bg-blue-600"
         >
           {isEditing ? "Update Post" : "Post"}
+          {loading&&<span className="absolute left-4 w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>}
         </button>
       </div>
     </div>

@@ -18,6 +18,8 @@ const Feed = ({ profile }) => {
           ? await getUsersPosts()
           : await getAllPosts(); 
         setPosts(response.posts); 
+        console.log(response,"rrrrrrrr");
+        
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
@@ -35,7 +37,7 @@ const Feed = ({ profile }) => {
 
   return (
     <div className="relative bg-[#f3f3f3]">
-
+<p className="text-xl font-medium ">{profile?"Timeline":"Feed"}</p>
       <div className="p-10">
         {posts?.map((post) => (
           <Post

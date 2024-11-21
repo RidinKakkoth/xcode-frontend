@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../features/authSlice';
 import { FaUserCircle } from 'react-icons/fa'; 
@@ -15,6 +15,7 @@ const Navbar = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
   };
+  const navigate=useNavigate()
 
   const toggleDropdown = () => {
     setDropdownOpen((prev) => !prev);
@@ -39,7 +40,7 @@ const Navbar = () => {
 
   return (
     <div className="fixed top-0 left-0 w-full shadow-md z-10 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 text-white p-4 flex justify-between items-center">
-      <span className="font-bold text-xl">Xcode Instagram</span>
+      <span onClick={()=>navigate('/')} className="cursor-pointer font-bold text-xl">Xcode Instagram</span>
       <div>
         {isLoggedIn ? (
           <div className="relative flex items-center gap-2" ref={dropdownRef}>
@@ -50,7 +51,7 @@ const Navbar = () => {
               onClick={toggleDropdown}
             />
             {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white text-gray-800 shadow-lg rounded-lg">
+              <div className="absolute right-0 mt-36 w-48 bg-white text-gray-800 shadow-lg rounded-lg">
                 <Link
                   to="/profile"
                   className="block px-4 py-2 hover:bg-gray-100 hover:rounded-t-lg"

@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { login } from '../../features/authSlice';
 import { useNavigate } from 'react-router-dom'; 
 import { userSignUp } from '../../api/api'; 
 
@@ -10,7 +8,6 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState(''); 
   const [error, setError] = useState('');  
-  const dispatch = useDispatch();
   const navigate = useNavigate(); 
 
   const handleSignUp = async (e) => {
