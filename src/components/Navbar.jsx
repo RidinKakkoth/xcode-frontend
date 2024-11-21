@@ -57,7 +57,7 @@ const Navbar = () => {
                   to="/profile"
                   className="block px-4 py-2 hover:bg-gray-100 hover:rounded-t-lg"
                   onClick={() => {
-                    dispatch(setActivePage('profile')); 
+                    // dispatch(setActivePage('profile')); 
                     setDropdownOpen(false); 
                   }}
                 >

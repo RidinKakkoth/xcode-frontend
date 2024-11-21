@@ -6,7 +6,7 @@ import { getAllPosts, getUsersPosts } from "../../api/api";
 import { setPosts } from "../../features/postSlice";
 import { useLocation } from "react-router-dom";
 
-const Feed = () => {
+const Feed = ({Profile}) => {
 
 
 
@@ -29,7 +29,7 @@ const Feed = () => {
   useEffect(()=>{
     const isProfilePage = location.pathname === '/profile'; 
     
-    isProfilePage?setIsProfile(true):setIsProfile(false)
+    isProfilePage||Profile?setIsProfile(true):setIsProfile(false)
   },[location])
 
 

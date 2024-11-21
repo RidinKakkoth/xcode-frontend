@@ -15,9 +15,9 @@ const App = () => {
         {isLoggedIn && <Navbar />}
         <div className={isLoggedIn ? "w-full sm:max-w-xl mx-auto mt-20" : "w-full "}>
           <Routes>
-            <Route path="/" element={isLoggedIn ? <FeedPage /> : <Navigate to="/login" />} />
-            <Route path="/login" element={isLoggedIn ? <FeedPage /> : <LoginPage/>} />
-            <Route path="/profile" element={isLoggedIn ? <FeedPage  /> : <Navigate to="/login" />} />
+            <Route path="/" element={isLoggedIn ? <FeedPage Profile={false} /> : <Navigate to="/login" />} />
+            <Route path="/login" element={isLoggedIn ? <FeedPage Profile={false} /> : <LoginPage/>} />
+            <Route path="/profile" element={isLoggedIn ? <FeedPage Profile={true}  /> : <Navigate to="/login" />} />
             <Route path="/login" element={!isLoggedIn ? <LoginPage /> : <Navigate to="/" />} />
             <Route path="/signup" element={!isLoggedIn ? <SignupPage /> : <Navigate to="/" />} />
           </Routes>
