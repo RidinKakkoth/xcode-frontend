@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import { userSignUp } from '../../api/api'; 
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -22,8 +23,12 @@ const SignUp = () => {
 
       const response = await userSignUp(name,email, password);
    
-if(response.success)
+if(response.success){
       navigate('/login'); 
+    toast.success(response.message)}
+    else{
+      toast.error(response.message)
+    }
 
     } catch (err) {
       setError('Failed to sign up. Please try again.');
@@ -57,6 +62,7 @@ if(response.success)
           placeholder="Password"
           value={password}
           required
+          minLength={6}
           onChange={(e) => setPassword(e.target.value)}
           className="block p-2 mb-4 w-full border border-gray-300 rounded-md"
           />
@@ -64,6 +70,7 @@ if(response.success)
           type="password"
           placeholder="Confirm Password"
           required
+          minLength={6}
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           className="block p-2 mb-4 w-full border border-gray-300 rounded-md"

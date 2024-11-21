@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../features/authSlice';
 import { useNavigate } from 'react-router-dom'; 
 import { userLogin } from '../../api/api';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -22,7 +23,10 @@ const Login = () => {
         dispatch(login({ user: response.user, token: response.token }));
         localStorage.setItem('user', JSON.stringify(response.user));
         localStorage.setItem('token', response.token);
-        navigate('/dashboard'); 
+        navigate('/'); 
+      }
+      else{
+        toast.error(response.message)
       }
 
     } catch (err) {

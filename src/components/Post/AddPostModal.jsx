@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { IoIosCamera } from "react-icons/io"; 
 import { addPost, updatePost } from "../../api/api"; 
-import { useNavigate } from "react-router-dom";
 import { IoCloseCircle } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
+import { toast } from "react-toastify";
 
 const AddPostModal = ({setTrigger, setShowModal, postToEdit, isEditing,profile }) => {
   const [image, setImage] = useState(null);
@@ -33,7 +33,7 @@ const AddPostModal = ({setTrigger, setShowModal, postToEdit, isEditing,profile }
     e.preventDefault();
 
     if (!caption || !description || (!image && !imagePreview)) {
-      alert("Please add all required fields!");
+      toast.warn("Please add all required fields!");
       return;
     }
 
@@ -50,7 +50,7 @@ const AddPostModal = ({setTrigger, setShowModal, postToEdit, isEditing,profile }
 
         if(response.success){
           setShowModal(false);
-          alert("updated")
+          toast.success("post updated")
           setLoading(false)
           setTrigger((prev)=>!prev)
      
@@ -66,14 +66,17 @@ const AddPostModal = ({setTrigger, setShowModal, postToEdit, isEditing,profile }
         if (response.success) {
           setTrigger((prev)=>!prev)
           setLoading(false)
-          alert("added");
+          toast.success("post uploaded");
         }
+        console.log(response,"abobbbelow errr")
         
       }
 
       setShowModal(false); // Close modal
       
     } catch (error) {
+      console.log(error,"below errr")
+      
       console.error("Error submitting post:", error);
     }
   };
