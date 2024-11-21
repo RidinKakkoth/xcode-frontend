@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../features/authSlice';
 import { FaUserCircle } from 'react-icons/fa'; 
+import { setActivePage } from '../features/postSlice';
 
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false); 
@@ -55,7 +56,10 @@ const Navbar = () => {
                 <Link
                   to="/profile"
                   className="block px-4 py-2 hover:bg-gray-100 hover:rounded-t-lg"
-                  onClick={() => setDropdownOpen(false)}
+                  onClick={() => {
+                    dispatch(setActivePage('profile')); 
+                    setDropdownOpen(false); 
+                  }}
                 >
                   Profile
                 </Link>

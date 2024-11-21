@@ -115,6 +115,7 @@ const AddPostModal = ({setTrigger, setShowModal, postToEdit, isEditing,profile }
               </div>
               <input
                 id="file-input"
+                required
                 type="file"
                 accept="image/*"
                 className="hidden"
@@ -143,11 +144,13 @@ const AddPostModal = ({setTrigger, setShowModal, postToEdit, isEditing,profile }
           value={caption}
           onChange={(e) => setCaption(e.target.value)}
           placeholder="Write a caption..."
+          required
           className="w-full p-3 border border-gray-300 rounded-md mb-4"
-        />
+          />
 
         <textarea
           value={description}
+          required
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Write a description..."
           rows="4"

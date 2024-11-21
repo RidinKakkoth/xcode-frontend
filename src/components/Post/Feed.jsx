@@ -9,12 +9,16 @@ const Feed = ({ profile }) => {
 
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.post.posts);
+  const activePage = useSelector((state) => state.post.activePage);
+  console.log(activePage,"::::::::::");
+  
+
   const [showModal, setShowModal] = useState(false);
   // const [posts, setPosts] = useState([]);
   const [editable, setEditable] = useState(false);
   const [postToEdit, setPostToEdit] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [trigger, setTrigger] = useState(false);
+  // const [trigger, setTrigger] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -29,7 +33,8 @@ const Feed = ({ profile }) => {
 
     setEditable(profile ? true : false);
     fetchPosts();
-  }, [profile, trigger]);
+  }, [profile]);
+  // }, [profile, trigger]);
 
   const handleAddPost = () => {
     setPostToEdit(null);
