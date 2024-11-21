@@ -30,7 +30,9 @@ const Feed = ({Profile}) => {
     const isProfilePage = location.pathname === '/profile'; 
     
     isProfilePage||Profile?setIsProfile(true):setIsProfile(false)
-  },[location])
+    console.log(isProfilePage,"ii",Profile,"]]]");
+    
+  },[])
 
 
   useEffect(() => {
