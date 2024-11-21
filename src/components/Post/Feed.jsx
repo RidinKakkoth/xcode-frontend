@@ -4,8 +4,11 @@ import Post from "./Post";
 import AddPostModal from "./AddPostModal";
 import { getAllPosts, getUsersPosts } from "../../api/api";
 import { setPosts } from "../../features/postSlice";
+import { useLocation } from "react-router-dom";
 
-const Feed = ({ profile }) => {
+const Feed = () => {
+
+
 
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.post.posts);
@@ -18,12 +21,22 @@ const Feed = ({ profile }) => {
   const [editable, setEditable] = useState(false);
   const [postToEdit, setPostToEdit] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const[isProfile,setIsProfile]=useState(false)
   // const [trigger, setTrigger] = useState(false);
+
+  const location = useLocation();  
+  
+  useEffect(()=>{
+    const isProfilePage = location.pathname === '/profile'; 
+    
+    isProfilePage?setIsProfile(true):setIsProfile(false)
+  },[location])
+
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = profile ? await getUsersPosts() : await getAllPosts();
+        const response = isProfile ? await getUsersPosts() : await getAllPosts();
         // setPosts(response.posts);
         dispatch(setPosts(response.posts)); 
       } catch (error) {
@@ -31,9 +44,9 @@ const Feed = ({ profile }) => {
       }
     };
 
-    setEditable(profile ? true : false);
+    setEditable(isProfile ? true : false);
     fetchPosts();
-  }, [profile]);
+  }, [isProfile]);
   // }, [profile, trigger]);
 
   const handleAddPost = () => {
@@ -44,7 +57,7 @@ const Feed = ({ profile }) => {
 
   return (
     <div className="relative justify-center bg-[#f3f3f3]">
-      <p className="text-xl ml-2 font-medium ">{profile ? "Timeline" : "Feed"}</p>
+      <p className="text-xl ml-2 font-medium ">{isProfile ? "Timeline" : "Feed"}</p>
       <div className="p-10">
         {posts?.map((post) => (
           <Post
@@ -68,7 +81,7 @@ const Feed = ({ profile }) => {
 
       {showModal && (
         <AddPostModal
-          profile={profile}
+          profile={isProfile}
           // setTrigger={setTrigger}
           setShowModal={setShowModal}
           postToEdit={postToEdit}
