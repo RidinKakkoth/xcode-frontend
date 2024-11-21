@@ -24,14 +24,16 @@ const Feed = ({profile}) => {
   const[isProfile,setIsProfile]=useState(false)
   // const [trigger, setTrigger] = useState(false);
 
- 
+  const location = useLocation();  
   
   useEffect(()=>{
-
+    const isProfilePage = location.pathname === '/profile'; 
+    console.log(isProfilePage,"ooooooo");
     
    profile?setIsProfile(true):setIsProfile(false)
     
-  },[profile])
+    
+  },[location,profile])
 
 
   useEffect(() => {
