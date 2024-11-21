@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 const Feed = ({profile}) => {
 
 
-
+  console.log(profile,"2");
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.post.posts);
   const activePage = useSelector((state) => state.post.activePage);
