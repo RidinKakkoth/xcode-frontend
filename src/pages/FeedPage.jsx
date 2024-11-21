@@ -1,10 +1,10 @@
 import React from 'react'
 import Feed from '../components/Post/Feed'
 
-const FeedPage = ({Profile}) => {
+const FeedPage = ({profile}) => {
   return (
     <div>
-      <Feed Profile={Profile}/>
+      <Feed profile={profile}/>
     </div>
   )
 }
